@@ -23,7 +23,7 @@ npm install
 ### 2️⃣ Install Tailwind CSS (latest)
 
 ```bash
-npm install tailwindcss
+npm install tailwindcss @tailwindcss/vite
 ```
 
 #### Add Tailwind import
@@ -32,6 +32,13 @@ In `src/index.css`:
 
 ```css
 @import "tailwindcss";
+```
+
+In `vite.config.js`
+
+```js
+import tailwindcss from "@tailwindcss/vite";
+plugins: [tailwindcss()];
 ```
 
 ---
@@ -70,6 +77,8 @@ npm run dev
 ---
 
 ### Test
+
+In `App.jsx`
 
 ```jsx
 <h1 className="text-3xl font-bold text-blue-500">Redux Bag</h1>
