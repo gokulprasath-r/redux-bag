@@ -6,7 +6,7 @@ export default function Loader({ size = "md" }) {
     };
 
     return (
-        <div className="flex items-center justify-center">
+        <div className="flex flex-1 items-center justify-center">
             <div
                 className={`
           ${sizes[size]}
