@@ -2,11 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchProducts = createAsyncThunk(
     "products/fetchProducts",
-    async () => {
-        const res = await fetch("https://dummyjson.com/products");
+    async (page) => {
+        const limit = 8;
+        const res = await fetch(
+            `https://dummyjson.com/products?limit=8&skip=${limit * page}`,
+        );
         const data = await res.json();
         return data.products;
-    }
+    },
 );
 
 export const fetchSingleProduct = createAsyncThunk(
@@ -15,7 +18,7 @@ export const fetchSingleProduct = createAsyncThunk(
         const res = await fetch(`https://dummyjson.com/products/${id}`);
         const data = await res.json();
         return data;
-    }
+    },
 );
 
 const productsSlice = createSlice({
@@ -26,6 +29,7 @@ const productsSlice = createSlice({
             product: null,
             quantity: 1,
         },
+        page: 0,
         loading: false,
         error: null,
     },
@@ -36,6 +40,9 @@ const productsSlice = createSlice({
 
         decreaseQty: (state) => {
             state.selectedProduct.quantity -= 1;
+        },
+        changePage: (state, action) => {
+            action.payload === "inc" ? (state.page += 1) : (state.page -= 1);
         },
     },
 
@@ -69,5 +76,5 @@ const productsSlice = createSlice({
     },
 });
 
-export const { increaseQty, decreaseQty } = productsSlice.actions;
+export const { increaseQty, decreaseQty, changePage } = productsSlice.actions;
 export default productsSlice.reducer;

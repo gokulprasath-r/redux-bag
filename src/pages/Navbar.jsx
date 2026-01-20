@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleTheme, toggleNav } from "../features/theme/ThemeSlice";
+import { toggleTheme, toggleNav } from "../features/theme/themeSlice";
 function Navbar() {
     const { count } = useSelector((state) => state.cart);
     const dispatch = useDispatch();

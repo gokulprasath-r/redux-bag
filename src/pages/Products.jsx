@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../features/products/productsSlice";
+import { fetchProducts, changePage } from "../features/products/productsSlice";
 import { useEffect } from "react";
 import Loader from "../components/Loader";
 function Products() {
     const dispatch = useDispatch();
 
-    const { products, loading } = useSelector((state) => state.products);
+    const { products, loading, page } = useSelector((state) => state.products);
 
     useEffect(() => {
-        dispatch(fetchProducts());
-    }, [dispatch]);
+        dispatch(fetchProducts(page));
+    }, [dispatch, page]);
 
     return (
         <section className="bg-blue-50 dark:bg-slate-900 px-4 py-4">
@@ -100,11 +100,14 @@ function Products() {
 
                         <div className="flex justify-center mt-10">
                             <div className="flex items-center gap-2">
-                                <button className="px-3 py-2 rounded-md  text-sm hover:bg-gray-100 bg-white dark:bg-slate-800 dark:text-slate-100">
+                                <button
+                                    className="px-3 py-2 rounded-md  text-sm hover:bg-blue-700 bg-blue-600 dark:text-slate-100"
+                                    onClick={() => dispatch(changePage("dec"))}
+                                >
                                     ← Prev
                                 </button>
 
-                                {[1, 2, 3, 4, 5].map((page) => (
+                                {/* {[1, 2, 3, 4, 5].map((page) => (
                                     <button
                                         key={page}
                                         className={`px-4 dark:text-slate-100 py-2 rounded-md text-sm font-medium cursor-pointer disabled:cursor-not-allowed disabled:bg-blue-300 ${
@@ -115,9 +118,12 @@ function Products() {
                                     >
                                         {page}
                                     </button>
-                                ))}
+                                ))} */}
 
-                                <button className="bg-white dark:bg-slate-800 px-3 py-2 rounded-md dark:text-slate-100 text-sm hover:bg-gray-100">
+                                <button
+                                    className="bg-blue-600 px-3 py-2 rounded-md dark:text-slate-100 text-sm hover:bg-blue-700"
+                                    onClick={() => dispatch(changePage("inc"))}
+                                >
                                     Next →
                                 </button>
                             </div>
