@@ -20,6 +20,7 @@ const checkoutSlice = createSlice({
     name: "checkout",
     initialState: {
         users: [],
+        localUsers: [],
         name: null,
         address: null,
         totalPrice: 0,
@@ -30,8 +31,8 @@ const checkoutSlice = createSlice({
 
     reducers: {
         placeOrder: (state, action) => {
-            state.users.push({
-                id: state.users.length + 1,
+            state.localUsers.push({
+                id: state.users.length + state.localUsers.length + 1,
                 name: action.payload.name,
                 address: action.payload.address,
                 totalPrice: action.payload.totalPrice,

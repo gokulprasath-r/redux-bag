@@ -4,12 +4,13 @@ import { fetchUsers } from "../features/checkout/checkoutSlice";
 import Loader from "../components/Loader";
 
 function MyOrders() {
-    const { users, loading } = useSelector((state) => state.checkout);
+    const { users, localUsers, loading } = useSelector(
+        (state) => state.checkout,
+    );
 
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchUsers());
-        console.log("S");
     }, [dispatch]);
 
     const formatDate = (isoDate) =>
@@ -30,15 +31,18 @@ function MyOrders() {
                 </h1>
                 <span className="bg-blue-100 text-blue-600 px-4 py-1 flex rounded-full text-sm font-medium">
                     Total Orders :&nbsp;
-                    {loading ? <Loader size="sm" /> : users.length}
+                    {loading ? (
+                        <Loader size="sm" />
+                    ) : (
+                        [...users, ...localUsers].length
+                    )}
                 </span>
             </div>
-            {console.log(users)}
             {loading ? (
                 <Loader />
             ) : (
                 <>
-                    {users.length > 0 ? (
+                    {[...users, ...localUsers].length > 0 ? (
                         <div className="overflow-x-auto bg-white dark:bg-slate-800 rounded-lg shadow-sm">
                             <table className="w-full text-left border-collapse">
                                 <thead className="bg-blue-100 text-sm text-gray-600 dark:text-slate-900">
@@ -53,7 +57,7 @@ function MyOrders() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {[...users]
+                                    {[...users, ...localUsers]
                                         .sort(
                                             (a, b) =>
                                                 new Date(b.date) -
@@ -62,21 +66,21 @@ function MyOrders() {
                                         .map((order) => (
                                             <tr
                                                 key={order.id}
-                                                className=" text-sm hover:bg-gray-50 hover:dark:bg-slate-700"
+                                                className=" text-sm hover:bg-gray-300 cursor-pointer hover:dark:bg-slate-700"
                                             >
-                                                <td className="px-4 py-3 font-medium dark:text-slate-100">
+                                                <td className="px-3 py-3 font-medium dark:text-slate-100">
                                                     {order.name}
                                                 </td>
-                                                <td className="px-4 py-3 text-gray-600 dark:text-slate-100">
+                                                <td className="px-3 py-3 text-gray-600 dark:text-slate-100">
                                                     {order.address}
                                                 </td>
-                                                <td className="px-4 py-3 dark:text-slate-100">
+                                                <td className="px-3 py-3 dark:text-slate-100">
                                                     {order.totalItems}
                                                 </td>
-                                                <td className="px-4 py-3 font-semibold text-blue-600 dark:text-slate-100 ">
+                                                <td className="px-3 py-3 font-semibold text-blue-600 dark:text-slate-100 ">
                                                     ${order.totalPrice}
                                                 </td>
-                                                <td className="px-4 py-3 text-gray-500 dark:text-slate-100 hidden md:block">
+                                                <td className="px-3 py-3 text-gray-500 dark:text-slate-100 hidden md:block">
                                                     {formatDate(order.date)}
                                                 </td>
                                             </tr>

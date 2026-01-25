@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import {
     fetchSingleProduct,
@@ -27,12 +27,14 @@ function SingleProduct() {
     ) : (
         <section className="max-w-5xl bg-blue-50 dark:bg-slate-900 mx-auto px-4 py-10 flex flex-col md:flex-row gap-10 items-center">
             <div className="md:w-1/2 flex flex-col ">
-                <Link
-                    to="/products"
-                    className="mb-10 md:mb-3 w-full text-center text-sm text-blue-600 dark:text-slate-100 hover:underline"
-                >
-                    ← Go Back
-                </Link>
+                <div className="w-full mb-10  text-center md:mb-3">
+                    <NavLink
+                        to="/products"
+                        className="mb-10 md:mb-3 w-fit text-sm text-blue-600 dark:text-slate-100 hover:underline"
+                    >
+                        ← Go Back
+                    </NavLink>
+                </div>
 
                 <img
                     src={selectedProduct.product.images[0]}
@@ -43,7 +45,7 @@ function SingleProduct() {
 
             <div className="md:w-1/2 space-y-4 px-15 md:p-0 ">
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-slate-100">
-                    {selectedProduct.product.brand}
+                    {selectedProduct.product.title}
                 </h1>
 
                 <p className="uppercase text-xs text-gray-500 tracking-wide dark:text-slate-100">
@@ -52,7 +54,7 @@ function SingleProduct() {
 
                 <div className="flex items-center gap-5">
                     <span className="text-2xl font-semibold text-blue-600">
-                        ${selectedProduct.product.price}
+                        $&nbsp;{Math.ceil(selectedProduct.product.price)}
                     </span>
                     <span className="text-yellow-500 text-sm">
                         {selectedProduct.product.rating.toFixed(1)} ★
@@ -69,7 +71,7 @@ function SingleProduct() {
                     </span>
                     <div className="flex items-center overflow-hidden">
                         <button
-                            className="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white shadow-sm rounded-full cursor-pointer disabled:cursor-not-allowed disabled:bg-blue-300 dark:disabled:bg-slate-700"
+                            className="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white shadow-sm rounded-full cursor-pointer disabled:cursor-not-allowed disabled:bg-blue-300 dark:disabled:bg-slate-500"
                             onClick={() => {
                                 dispatch(
                                     decreaseQty(selectedProduct.product.id),
@@ -91,6 +93,9 @@ function SingleProduct() {
                                     increaseQty(selectedProduct.product.id),
                                 );
                             }}
+                            disabled={
+                                selectedProduct.quantity > 4 && `disabled`
+                            }
                         >
                             +
                         </button>
@@ -98,12 +103,12 @@ function SingleProduct() {
                 </div>
 
                 {isInCart ? (
-                    <Link
+                    <NavLink
                         to="/cart"
                         className="bg-blue-500 text-white px-6 py-2 rounded-md text-sm font-semibold hover:bg-blue-600 transition cursor-pointer"
                     >
                         Go To Cart
-                    </Link>
+                    </NavLink>
                 ) : (
                     <button
                         className="bg-blue-500 text-white px-6 py-2 rounded-md text-sm font-semibold hover:bg-blue-600 transition cursor-pointer"

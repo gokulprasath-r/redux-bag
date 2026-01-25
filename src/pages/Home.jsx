@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Loader from "../components/Loader";
 import Toast from "../components/Toast";
 import logo from "../assets/logo.png";
@@ -18,7 +18,7 @@ function Home() {
                         The best online store for all your shopping needs
                     </p>
                     <button className="bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-550 transition">
-                        <Link to="/products">Explore Products</Link>
+                        <NavLink to="/products">Explore Products</NavLink>
                     </button>
                 </div>
 

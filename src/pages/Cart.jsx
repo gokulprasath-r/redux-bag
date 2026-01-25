@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import { useEffect } from "react";
 import {
@@ -19,7 +19,9 @@ function Cart() {
                     Your Cart
                 </h1>
                 {cartItems.length < 1 ? (
-                    <h3 className="text-center">Your cart is Empty</h3>
+                    <h3 className="text-center text-black dark:text-slate-100">
+                        cart is Empty :(
+                    </h3>
                 ) : (
                     <>
                         {" "}
@@ -87,11 +89,8 @@ function Cart() {
                                             </button>
                                         </div>
                                         <span className="font-semibold text-blue-600">
-                                            $
-                                            {(
-                                                item.product.price *
-                                                item.quantity
-                                            ).toFixed(2)}
+                                            $&nbsp;
+                                            {item.product.price * item.quantity}
                                         </span>
                                         <button
                                             onClick={() => {
@@ -116,11 +115,11 @@ function Cart() {
                                 Total :
                             </h3>
                             <h3 className="font-bold text-lg dark:text-slate-100">
-                                $ {total}
+                                $ {total}.00
                             </h3>
                         </div>
                         <button className="mt-6 w-full bg-blue-500 text-white py-3 rounded-md font-semibold hover:bg-blue-600 transition">
-                            <Link to="/checkout"> Proceed to Checkout</Link>
+                            <NavLink to="/checkout"> Proceed to Checkout</NavLink>
                         </button>
                     </>
                 )}

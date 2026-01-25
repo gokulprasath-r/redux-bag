@@ -1,10 +1,10 @@
 function About() {
     return (
         <section className="flex-1 mx-auto px-8 py-20 bg-blue-50 dark:bg-slate-900 ">
-            <h1 className="text-4xl text-blue-500  md:text-5xl font-bold text-center mb-8">
+            <h1 className="text-3xl text-blue-500  font-bold text-center mb-8">
                 About Redux Bag
             </h1>
-            <p className="text-gray-700 dark:text-slate-200 text-lg md:text-xl leading-relaxed text-center">
+            <p className="text-gray-700 dark:text-slate-200 text-lg leading-relaxed text-center">
                 Redux Bag is your one-stop online store designed to bring
                 convenience, variety, and quality right to your fingertips. From
                 essential daily items to specialty products, Redux Bag offers an

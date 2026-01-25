@@ -86,7 +86,7 @@ function Checkout() {
                         <div className="space-y-3 text-sm">
                             <div className="flex justify-between text-black dark:text-slate-100">
                                 <span>Items ({data.totalItems})</span>
-                                <span>$ {data.totalPrice - 1}</span>
+                                <span>$ {data.totalPrice - 1}.00</span>
                             </div>
                             <div className="flex justify-between text-black dark:text-slate-100">
                                 <span>Delivery</span>
@@ -94,14 +94,14 @@ function Checkout() {
                             </div>
                             <div className="flex justify-between text-black dark:text-slate-100">
                                 <span>Tax</span>
-                                <span>$1.00</span>
+                                <span>$ 1.00</span>
                             </div>
 
                             <hr className="text-black dark:text-slate-100" />
 
                             <div className="flex justify-between font-semibold text-lg text-black dark:text-slate-100">
                                 <span>Total</span>
-                                <span>${data.totalPrice}</span>
+                                <span>$&nbsp;{data.totalPrice}.00</span>
                             </div>
                         </div>
                     </div>
