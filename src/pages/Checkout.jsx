@@ -20,7 +20,7 @@ function Checkout() {
     };
     return (
         <section className="flex flex-col w-full md:max-w-4xl mx-auto px-4 py-10 gap-8 bg-blue-50 dark:bg-slate-900">
-            <h1 className="text-3xl font-bold text-gray-800 dark:text-slate-100 text-center">
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-slate-100 text-center cursor-pointer">
                 Checkout
             </h1>
             {cartItems.length > 0 ? (
@@ -40,7 +40,6 @@ function Checkout() {
                                     date: new Date().toISOString(),
                                 };
                                 dispatch(placeOrder(updatedData));
-                                console.log(updatedData.date);
                                 dispatch(clearCart());
                                 setData({
                                     name: "",

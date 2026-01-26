@@ -48,10 +48,10 @@ const productsSlice = createSlice({
         changePage: (state, action) => {
             if (action.payload === "dec" && state.page > 1) {
                 state.page -= 1;
-            }
-
-            if (action.payload === "inc") {
+            } else if (action.payload === "inc") {
                 state.page += 1;
+            } else {
+                state.page = action.payload;
             }
         },
         finalProducts: (state) => {
@@ -62,9 +62,6 @@ const productsSlice = createSlice({
                 start,
                 start + limit,
             );
-            console.log(state.limitedProducts);
-            console.log(state.page, state.totalPages);
-            console.log("------------");
         },
         applyFilters: (state, action) => {
             const { category, company, price, sort, searchText } =

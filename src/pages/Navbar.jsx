@@ -9,13 +9,7 @@ function Navbar() {
         <nav className="relative bg-white dark:bg-slate-800 shadow-sm py-3 flex items-center justify-between">
             <div className="flex items-center space-x-2 ml-4">
                 <div className=" text-white font-bold rounded">
-                    <img
-                        srcSet="/logo.png"
-                        height="64"
-                        width="64"
-                        alt=""
-                        srcset=""
-                    />
+                    <img srcSet="/logo.png" height="64" width="64" alt="" />
                 </div>
                 <span className="font-bold text-blue-500 dark:text-slate-100 text-lg">
                     Redux Bag

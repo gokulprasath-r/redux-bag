@@ -36,7 +36,6 @@ function Products() {
 
     const handlefilter = (e) => {
         e.preventDefault();
-        console.log(e.target.value);
         setFilterOptions({
             ...filterOptions,
 
@@ -50,7 +49,7 @@ function Products() {
                     <h2 className="text-xl font-semibold mb-3 text-black dark:text-slate-100">
                         Filters
                     </h2>
-                    <form type="submit">
+                    <form>
                         <input
                             type="text"
                             placeholder="Search product..."
@@ -149,10 +148,18 @@ function Products() {
                                         sort: "",
                                         price: 3000,
                                     });
-                                    dispatch(applyFilters(filterOptions));
+                                    dispatch(
+                                        applyFilters({
+                                            searchText: "",
+                                            category: "",
+                                            company: "",
+                                            sort: "",
+                                            price: 3000,
+                                        }),
+                                    );
                                 }}
                             >
-                                Reset
+                                Reset Filters
                             </button>
                         </div>
                     </form>
@@ -206,32 +213,42 @@ function Products() {
                                             onClick={() => {
                                                 dispatch(changePage("dec"));
                                                 dispatch(finalProducts());
-                                                console.log(page);
                                             }}
                                             disabled={page <= 1 && `disabled`}
                                         >
                                             ← Prev
                                         </button>
 
-                                        {/* {[1, 2, 3, 4, 5].map((page) => (
-                                    <button
-                                        key={page}
-                                        className={`px-4  py-2 rounded-md text-sm font-medium cursor-pointer disabled:cursor-not-allowed disabled:bg-blue-300 ${
-                                            page === 1
-                                                ? "bg-blue-500 text-white"
-                                                : " bg-white dark:bg-slate-800 hover:bg-gray-100"
-                                        }`}
-                                    >
-                                        {page}
-                                    </button>
-                                ))} */}
+                                        {[...Array(totalPages).keys()].map(
+                                            (page1) => (
+                                                <button
+                                                    key={page1 + 1}
+                                                    className={`px-3 py-2 rounded-md cursor-pointer text-sm  hover:bg-blue-700 hover:border-blue-700 hover:text-white disabled:cursor-not-allowed disabled:bg-blue-300 disabled:dark:bg-slate-700 border-1 border-black text-black  dark:text-white dark:border-slate-800 ${
+                                                        page === page1 + 1
+                                                            ? "border-blue-700 bg-blue-600 text-white "
+                                                            : "bg-white dark:bg-slate-800 "
+                                                    }`}
+                                                    onClick={() => {
+                                                        dispatch(
+                                                            changePage(
+                                                                page1 + 1,
+                                                            ),
+                                                        );
+                                                        dispatch(
+                                                            finalProducts(),
+                                                        );
+                                                    }}
+                                                >
+                                                    {page1 + 1}
+                                                </button>
+                                            ),
+                                        )}
 
                                         <button
                                             className="bg-blue-600 px-3 py-2 rounded-md cursor-pointer text-slate-100 text-sm hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300 disabled:dark:bg-slate-700"
                                             onClick={() => {
                                                 dispatch(changePage("inc"));
                                                 dispatch(finalProducts());
-                                                console.log(page, totalPages);
                                             }}
                                             disabled={
                                                 page >= totalPages && `disabled`

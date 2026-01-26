@@ -9,10 +9,9 @@ const cartSlice = createSlice({
     },
     reducers: {
         addToCart: (state, action) => {
-            console.log(state.cartItems);
             const item = action.payload.product;
             const existingItem = state.cartItems.find(
-                (x) => x.product.id === item.id
+                (x) => x.product.id === item.id,
             );
 
             if (existingItem) {
@@ -30,15 +29,19 @@ const cartSlice = createSlice({
 
         removeFromCart: (state, action) => {
             state.cartItems = state.cartItems.filter(
-                (x) => x.product.id !== action.payload
+                (x) => x.product.id !== action.payload,
             );
 
+            state.count = state.cartItems.length;
+        },
+        removeAllFromCart: (state) => {
+            state.cartItems = [];
             state.count = state.cartItems.length;
         },
 
         increaseQty: (state, action) => {
             const item = state.cartItems.find(
-                (x) => x.product.id === action.payload
+                (x) => x.product.id === action.payload,
             );
             if (item) {
                 item.quantity += 1;
@@ -48,7 +51,7 @@ const cartSlice = createSlice({
 
         decreaseQty: (state, action) => {
             const item = state.cartItems.find(
-                (x) => x.product.id === action.payload
+                (x) => x.product.id === action.payload,
             );
             if (item && item.quantity > 1) {
                 item.quantity -= 1;
@@ -59,13 +62,13 @@ const cartSlice = createSlice({
         clearCart: (state) => {
             state.cartItems = [];
             state.count = 0;
-            state.total=0;
+            state.total = 0;
         },
 
         calculateTotal: (state) => {
             state.total = state.cartItems.reduce(
                 (sum, item) => sum + item.product.price * item.quantity,
-                0
+                0,
             );
         },
     },
@@ -74,6 +77,7 @@ const cartSlice = createSlice({
 export const {
     addToCart,
     removeFromCart,
+    removeAllFromCart,
     increaseQty,
     decreaseQty,
     clearCart,

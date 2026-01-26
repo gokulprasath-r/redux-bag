@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useEffect } from "react";
 import {
     removeFromCart,
+    removeAllFromCart,
     increaseQty,
     decreaseQty,
     calculateTotal,
@@ -20,7 +21,7 @@ function Cart() {
                 </h1>
                 {cartItems.length < 1 ? (
                     <h3 className="text-center text-black dark:text-slate-100">
-                        cart is Empty :(
+                        Your Cart is Empty
                     </h3>
                 ) : (
                     <>
@@ -118,9 +119,25 @@ function Cart() {
                                 $ {total}.00
                             </h3>
                         </div>
-                        <button className="mt-6 w-full bg-blue-500 text-white py-3 rounded-md font-semibold hover:bg-blue-600 transition">
-                            <NavLink to="/checkout"> Proceed to Checkout</NavLink>
-                        </button>
+                        <div className="flex flex-row gap-2">
+                            {" "}
+                            <button className="mt-6 w-full bg-blue-500 text-white rounded-md  font-semibold hover:bg-blue-600 transition cursor-pointer flex">
+                                <NavLink
+                                    to="/checkout"
+                                    className="w-full py-3 rounded-md"
+                                >
+                                    {" "}
+                                    Proceed to Checkout
+                                </NavLink>
+                            </button>
+                            <button
+                                className="mt-6 w-full bg-blue-500 text-white py-3 rounded-md font-semibold hover:bg-blue-600 transition cursor-pointer"
+                                onClick={() => dispatch(removeAllFromCart())}
+                            >
+                                {" "}
+                                Clear Cart
+                            </button>
+                        </div>
                     </>
                 )}
             </div>
