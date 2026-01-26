@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { useEffect } from "react";
 import {
     removeFromCart,
     removeAllFromCart,
@@ -8,7 +7,7 @@ import {
     decreaseQty,
     calculateTotal,
 } from "../features/cart/cartSlice";
-import Loader from "../components/Loader";
+import Toast from "../components/Toast";
 function Cart() {
     const { cartItems, total } = useSelector((state) => state.cart);
     const dispatch = useDispatch();

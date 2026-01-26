@@ -68,7 +68,7 @@ function MyOrders() {
                                                 key={order.id}
                                                 className=" text-sm hover:bg-gray-300 cursor-pointer hover:dark:bg-slate-700"
                                             >
-                                                <td className="px-3 py-3 font-medium dark:text-slate-100">
+                                                <td className="px-3  py-3 font-medium dark:text-slate-100">
                                                     {order.name}
                                                 </td>
                                                 <td className="px-3 py-3 text-gray-600 dark:text-slate-100">
